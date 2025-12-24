@@ -1,7 +1,9 @@
 package model;
 
-public class User {
+import java.util.ArrayList;
 
+public class User {
+    //FALTA CREAR EL ARRAYLIST
     private int id;
     private String name;
     private String passwordHash;

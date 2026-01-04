@@ -10,6 +10,12 @@ public class Swing {
     private JFrame frame;
     private JPanel panel;
     private AuthContoller controller;
+    
+        
+    private JFrame mfaFrame;
+    private JLabel mfaCodeLabel;
+    private JLabel mfaCountdownLabel;
+    private javax.swing.Timer mfaTimer;
 
     public Swing(AuthContoller controller){
 
@@ -19,8 +25,11 @@ public class Swing {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Al cerrar la aplicacion se termina el programa
         frame.setSize(900, 600);
 
+        
+        
+        
         panel = new JPanel();
-        panel.setLayout(new GridLayout(0,1)); //Para alinear los componentes de la vista, botones, campos de texto etc
+        panel.setLayout(new GridLayout(0,1,5,5)); //Para alinear los componentes de la vista, botones, campos de texto etc
         frame.add(panel);
 
         frame.setLocationRelativeTo(null); //La app se abre en el centro de la pantalla
@@ -55,13 +64,16 @@ public class Swing {
         panel.repaint();
     }
 
+
+
     private void menuEsperandoOpcion(){
         //Para el estado Esperando_Opcion ponemos 2 botones
         JButton mfa = new JButton("Añadir cuenta MFA");
         JButton iniciarSesion = new JButton("Iniciar Sesion");
         /*hay que añadir las acciones de los botones, la clase authcontroller
         es la que debe de hacer las acciones correspondientes de los botones*/
-
+        mfa.addActionListener(e -> controller.cambiarAProcesandoMFA());
+        iniciarSesion.addActionListener(e -> controller.cambiarAProcesandoLogin());
 
         panel.add(mfa);
         panel.add(iniciarSesion);
@@ -72,7 +84,7 @@ public class Swing {
         JTextField correo = new JTextField();
         JButton boton = new JButton("Añadir");
         /*añadir la accion del boton*/
-
+        boton.addActionListener(e -> controller.añadirMFA(correo.getText()));
 
         panel.add(new JLabel("Correo electronico:"));
         panel.add(correo);
@@ -84,7 +96,7 @@ public class Swing {
         JTextField contraseña = new JPasswordField();
         JButton boton = new JButton("Confirmar");
         /*añadir la accion del boton */
-
+        boton.addActionListener(e -> controller.procesarLogin(usuario.getText(),contraseña.getText()));
 
         panel.add(new JLabel("Usuario:"));
         panel.add(usuario);
@@ -97,7 +109,7 @@ public class Swing {
         JTextField codigoTOTP = new JTextField();
         JButton boton = new JButton("Confirmar");
         /*añadir la accion del boton */
-
+        boton.addActionListener(e -> controller.introducirCodigo(codigoTOTP.getText()));
 
         panel.add(new JLabel("Introducir codigo MFA:"));
         panel.add(codigoTOTP);
@@ -111,5 +123,5 @@ public class Swing {
     private void menuBloqueado(){
         panel.add(new JLabel("Se ha bloqueado la cuenta"));
     }
-
 }
+

@@ -6,7 +6,6 @@ public class FactorPassword extends FactorAutenticacion {
 
     @Override
     public boolean verificar(AuthSession session, String input){
-        return false;
+        return session.getUser().checkPassword(input);
     }
-    
 }

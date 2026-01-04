@@ -2,15 +2,36 @@ package model;
 
 public class MFACuenta {
     private String email;
-    private String Secret;
-    private boolean Activar;
+    private String secret;
+    private boolean activar;
 
+
+    public MFACuenta(String email){
+        this.email = email;
+        this.secret = null;
+        this.activar = false;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public boolean isActivada() {
+        return activar;
+    }
+    
     public void Activar(String secreto){
-        System.out.println("NULL");
+        this.secret = secreto;
+        this.activar = true;
+        
     }
 
     public void Desactivar(){
-        System.out.println("NULL");
+        this.activar = false;
     }
     
 }

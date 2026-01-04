@@ -1,20 +1,24 @@
 package app;
-
-import controller.AuthContoller;
-import model.EstadoSesion;
-import view.Swing;
-
-public class App {  
+import controller.*;
+import model.*;
+import service.*;
+import view.*;
+public class App {
+    
     //MAIN
     public static void main(String[] args) {
-        EstadoSesion estado = EstadoSesion.Esperando_Opcion;
-        AuthContoller controller = new AuthContoller();
+
+        AuthSession sesion = new AuthSession();
+        UserCuentas cuentas = new UserCuentas();
+
+        AuthContoller controller = new AuthContoller(sesion, cuentas);
+
         Swing ventana = new Swing(controller);
-        ventana.mostrarVentana(estado);
-        
+        controller.setVentana(ventana);
+
+        ventana.mostrarVentana(sesion.getEstado());
     }
 
-    
 }
 
 

@@ -1,10 +1,17 @@
 package service;
 
 public class PoliticaDefinida {
-    private int MaxIntentos = 3;
+    private final int maxIntentos;
 
+    public PoliticaDefinida(){
+        this(3);
+    }
+
+    public PoliticaDefinida(int maxIntentos){
+        this.maxIntentos = Math.max(1, maxIntentos);
+    }
     public boolean Comprobar(int intentosFallidos) {
-        return intentosFallidos >= MaxIntentos;
+        return intentosFallidos >= maxIntentos;
     }
     
 }

@@ -1,16 +1,20 @@
 package model;
 
 public class AuthSession {
+    
     private EstadoSesion estado;
     private User user;
 
-    public AuthSession(User user) {
-        this.user = user;
+    public AuthSession() {
+        this.user = null;
         this.estado = EstadoSesion.Esperando_Opcion;
     }
 
+    public AuthSession(User user) {
+        this();
+        this.user = user;
+    }
 
-    
     public EstadoSesion getEstado() {
         return estado;
     }
@@ -24,7 +28,7 @@ public class AuthSession {
         this.user = user;
     }
     public void Start(User usuario){
-        
+        this.user = user; 
     }
 
     

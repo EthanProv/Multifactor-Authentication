@@ -24,9 +24,6 @@ public class Swing {
         frame = new JFrame("Authenticator MFA"); //Nombre de la ventana
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Al cerrar la aplicacion se termina el programa
         frame.setSize(900, 600);
-
-        
-        
         
         panel = new JPanel();
         panel.setLayout(new GridLayout(0,1,5,5)); //Para alinear los componentes de la vista, botones, campos de texto etc
@@ -38,6 +35,9 @@ public class Swing {
 
     public void mostrarVentana(EstadoSesion estado){
         panel.removeAll(); // Se hace para que al cambiar de estado se muestren otros componentes
+
+        //Usar los 2 metodos que hay que crear para cuando se cambie el
+        //estado a procesando_autenticacion
 
         switch (estado) {
             case Esperando_Opcion:
@@ -67,6 +67,8 @@ public class Swing {
 
 
     private void menuEsperandoOpcion(){
+        //Poner un panel que muestre "Selecciona una opcion"
+
         //Para el estado Esperando_Opcion ponemos 2 botones
         JButton mfa = new JButton("Añadir cuenta MFA");
         JButton iniciarSesion = new JButton("Iniciar Sesion");
@@ -81,6 +83,9 @@ public class Swing {
     }
 
     private void menuProcesandoMFA(){
+        //Cmbiar el metodo y poner 2 campos de texto 
+        //y 2 botones con "activar MFA" y "volver"
+        //Tambein poner la accion del boton de volver
         JTextField correo = new JTextField();
         JButton boton = new JButton("Añadir");
         /*añadir la accion del boton*/
@@ -92,6 +97,7 @@ public class Swing {
     }
 
     private void menuProcesandoLogin(){
+        //Añadir el boton de volver
         JTextField usuario = new JTextField();
         JTextField contraseña = new JPasswordField();
         JButton boton = new JButton("Confirmar");
@@ -106,6 +112,7 @@ public class Swing {
     }
 
     private void menuProcesandoAutenticacion(){
+        //Añadir boton de volver pero que ponga cancelar operacion
         JTextField codigoTOTP = new JTextField();
         JButton boton = new JButton("Confirmar");
         /*añadir la accion del boton */
@@ -117,11 +124,18 @@ public class Swing {
     }
 
     private void menuSesionActiva(){
+        //Añadir 2 botones con cerrar sesion (este boton volvera para atras) y salir
         panel.add(new JLabel("Has iniciado sesion"));
     }
 
     private void menuBloqueado(){
+        //2 botones de volver para al menu inicial y para terminar el programa
         panel.add(new JLabel("Se ha bloqueado la cuenta"));
     }
+
+    //Añadir metodos para la ventana que se genera una vez el usuario
+    //pasa al estado de autenticacion
+
+
 }
 

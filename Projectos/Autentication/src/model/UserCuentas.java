@@ -15,17 +15,22 @@ public class UserCuentas {
         usuarios.add(new User(2, "Jordib", "admin3"));
     }
 
-    public User findUser(String us) {
+    public User findUser(String us){
         for (User u : usuarios) {
             if (u.getName().equals(us)) return u;
         }
         return null;
     }
 
-    public User findMail(String mail) {
-        for (User u : usuarios) {
-            if (u.getMFAEmail().equals(mail)) return u;
+    public User findMail(String mail){
+        for (User u : usuarios){
+            if (u.getMFAEmail().equals(mail)){
+                return u;
+            }
         }
         return null;
     }
 }
+
+
+

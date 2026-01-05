@@ -1,101 +1,98 @@
 package model;
 
-import java.util.ArrayList;
-
 import service.PasswordHasher;
 
-public class User {
-    //FALTA CREAR EL ARRAYLIST
-    private int id;
-    private String name;
-    private String passwordHash;
-    private String password;
-    private int intentosFallidos;
-    private boolean ActiveMFA;
-    private boolean locked;
-    // AQUI PODEMOS PONER LA VARIABLE SESSION y borramos la clase
-    private MFACuenta mfa;
 
-    private String mfaEmail;
-    
-    public User(int id, String name, String password) {
+public class User {
+
+    private final int id;
+    private final String username;
+
+    private String passwordHash;
+
+    private int intentosFallidos;
+    private boolean locked;
+
+    // Composición 0..1
+    private MFACuenta mfaCuenta;
+
+    public User(int id, String username, String passwordPlain) {
         this.id = id;
-        this.name = name;
-        this.passwordHash = PasswordHasher.hash(password);
-        this.password = password;
-        mfaEmail = name + "@enti.cat";
+        this.username = username;
+        this.passwordHash = PasswordHasher.hash(passwordPlain);
         this.intentosFallidos = 0;
         this.locked = false;
-        this.mfa = null;
-        this.ActiveMFA = false;
+        this.mfaCuenta = null;
     }
-    public int getId() {
-        return id;
+
+    public int getId(){ 
+        return id; 
     }
+
+    public String getUsername(){ 
+        return username; 
+    }
+
     public String getName() {
-        return name;
+        return username;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public int getIntentosFallidos() {
-        return intentosFallidos;
-    }
-    public boolean isActiveMFA() {
-        return ActiveMFA;
+    public int getIntentosFallidos(){ 
+        return intentosFallidos; 
     }
 
-    public MFACuenta getMfa() {
-        return mfa;
+    public boolean isLocked(){ 
+        return locked; 
     }
 
-    public String getMFAEmail(){
-        return mfaEmail;
+    public MFACuenta getMfaCuenta(){ 
+        return mfaCuenta;
     }
 
-    public void activarMFA(String mail){
-        this.mfaEmail = mail;
-        this.ActiveMFA = true;
+    public boolean isActiveMFA(){
+        return mfaCuenta != null && mfaCuenta.isActivada();
     }
 
-    // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+
     
-    //Metodos:
-    public boolean checkPassword(String Password) {
-        if (locked){
-            return false;
+
+
+    //Lo de abajo habra que elimianr opinar?
+    public void activarMFA(String email, String secret){
+        if (mfaCuenta == null) {
+            mfaCuenta = new MFACuenta(email);
         }
-        return this.password.equals(Password);
-    
+        mfaCuenta.activar(secret);
     }
 
-    public boolean checkUser(String usuario) {
-        if (locked){
-            return false;
-        }
-        return this.name.equals(usuario);
-    
+    //HAY QUE REMPALZAR EL activarMFA por el nuevo a continuarcion
+    public void activarMFA(String email){
+        String secret = Integer.toHexString((username + ":" + System.nanoTime()).hashCode()).toUpperCase();
+        activarMFA(email, secret);
     }
 
-    public void IncrementarIntentosFallidos() {
-        this.intentosFallidos++;
+
+    public String getMFAEmail() {
+        if (mfaCuenta == null){
+            return null;
+        } 
+        return mfaCuenta.getEmail();
     }
 
-    public void ResetIntentosFallidos() {
-        this.intentosFallidos = 0;
+    public boolean checkPassword(String plainPassword) {
+        if (locked) return false;
+        return PasswordHasher.verify(plainPassword, passwordHash);
     }
 
-    public boolean lock(){
-        return locked;
-    }    
+    public void incrementarIntentosFallidos() {
+        intentosFallidos++;
+    }
+
+    public void resetIntentosFallidos() {
+        intentosFallidos = 0;
+    }
+
+    public void lock() {
+        locked = true;
+    }
 }

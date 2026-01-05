@@ -12,26 +12,29 @@ public class MFACuenta {
         this.activar = false;
     }
     
-    public String getEmail() {
+    public String getEmail(){
         return email;
     }
 
-    public String getSecret() {
+    public String getSecret(){
         return secret;
     }
 
-    public boolean isActivada() {
+    public boolean isActivada(){
         return activar;
     }
     
-    public void Activar(String secreto){
+    public void activar(String secreto){
         this.secret = secreto;
         this.activar = true;
         
     }
 
-    public void Desactivar(){
+    public void desactivar(){
         this.activar = false;
+        this.secret= null; //Ahora con el OPT ya no es importante
     }
     
 }
+
+

@@ -10,8 +10,13 @@ public class PoliticaDefinida {
     public PoliticaDefinida(int maxIntentos){
         this.maxIntentos = Math.max(1, maxIntentos);
     }
-    public boolean Comprobar(int intentosFallidos) {
+    public boolean comprobar(int intentosFallidos) {
         return intentosFallidos >= maxIntentos;
     }
+
+    //Getther de maximos intentos, estaira bien?
     
 }
+
+
+

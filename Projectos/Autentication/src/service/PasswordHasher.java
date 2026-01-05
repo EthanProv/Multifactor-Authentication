@@ -8,7 +8,7 @@ public final class PasswordHasher  {
         
     }
 
-    public static boolean verificarHash(String password, String guardarPasswor ){
+    public static boolean verify(String password, String guardarPasswor ){
         if (hash(password).equals(guardarPasswor)) return true;
         else return false;
     }
@@ -16,3 +16,6 @@ public final class PasswordHasher  {
     
 
 }
+
+
+

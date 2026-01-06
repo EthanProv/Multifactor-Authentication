@@ -63,7 +63,7 @@ public class AuthContoller {
         if (!ok) {
             JOptionPane.showMessageDialog(null, "El usuario no existe", "MFA", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "MFA activado para el usuario --> " + username, "MFA", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "MFA activado para el usuario --> " + usuario, "MFA", JOptionPane.INFORMATION_MESSAGE);
         }
         sesion.setEstado(EstadoSesion.Esperando_Opcion);
         actualizarVentana();
@@ -137,11 +137,11 @@ public class AuthContoller {
         if(u == null || !u.isActiveMFA() || u.getMfaCuenta() == null){
             return "-";
         }
-        return auth.getOtp().generarOTP(u.getMfaCuenta().getSecret());
+        return auth.getOtp().generarOTP(/*u.getMfaCuenta().getSecret()*/);
     }
 
     public int duracionDelCodigo(){
-        return auth.getOtp().segundosRestantes();
+        return auth.getOtp().segundosRestantes(0);
     }
     
 }

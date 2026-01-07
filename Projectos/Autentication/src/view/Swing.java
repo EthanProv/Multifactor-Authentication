@@ -4,12 +4,14 @@ import java.awt.*;
 
 import controller.AuthContoller;
 import model.EstadoSesion;
+import model.User;
 
 public class Swing {
     
     private JFrame frame;
     private JPanel panel;
     private AuthContoller controller;
+    
     
         
     private JFrame mfaFrame;
@@ -175,7 +177,8 @@ public class Swing {
         if (mfaFrame != null && mfaFrame.isDisplayable()){
             return;
         } 
-
+        JLabel emailLabel = new JLabel(controller.email(), SwingConstants.CENTER);
+        emailLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         mfaFrame = new JFrame("Codigo Multifacor");
         mfaFrame.setSize(360, 240);
         mfaFrame.setLocationRelativeTo(null);
@@ -190,7 +193,8 @@ public class Swing {
 
         JPanel p = new JPanel(new GridLayout(0,1,8,8));
         p.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        p.add(new JLabel("Codigo MFA actual:", SwingConstants.CENTER));
+        p.add(new JLabel("Codigo MFA actual de: "   , SwingConstants.CENTER));
+        p.add(emailLabel);
         p.add(mfaCodeLabel);
         p.add(mfaCountdownLabel);
         
@@ -198,13 +202,14 @@ public class Swing {
 
         // Actualiza cada 1 segundo
         mfaTimer = new javax.swing.Timer(1000, e -> {
-            mfaCodeLabel.setText(controller.codigoDemoActual());
+            controller.refrescarCodigoSiExpira();
+            mfaCodeLabel.setText(controller.codigoActual());
             mfaCountdownLabel.setText("Cambia en " + controller.segundosRestantesCodigo() + " s");
         });
         mfaTimer.start();
 
         // Primera carga
-        mfaCodeLabel.setText(controller.codigoDemoActual());
+        mfaCodeLabel.setText(controller.codigoActual());
         mfaCountdownLabel.setText("Cambia en " + controller.segundosRestantesCodigo() + " s");
 
         mfaFrame.setVisible(true);

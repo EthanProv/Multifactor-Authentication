@@ -47,7 +47,7 @@ public class AuthContoller {
         actualizarVentana();
     }
     
-    public void añadirMFA(String mail, String usuario){
+    public void añadirMFA(String usuario, String mail){
 
         
 
@@ -135,13 +135,25 @@ public class AuthContoller {
 
     }
 
+    public void refrescarCodigoSiExpira(){
+        auth.refrescarOtpSiExpira();
+    }
 
-    public String codigoDemoActual(){
+
+
+    public String codigoActual(){
         return auth.otpActual();
     }
 
     public int segundosRestantesCodigo(){
         return auth.segundosRestantesOTP();
+    }
+
+
+    public String email(){
+        User u = sesion.getUser();
+        String mail = u.getMfaCuenta().getEmail();
+        return (mail == null) ? "" : mail;
     }
 
     

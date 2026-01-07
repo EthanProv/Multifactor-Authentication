@@ -7,6 +7,7 @@ public class User {
 
     private final int id;
     private final String username;
+    private String email;
 
     private String passwordHash;
 
@@ -19,6 +20,7 @@ public class User {
     public User(int id, String username, String passwordPlain) {
         this.id = id;
         this.username = username;
+        email = username + "@enti.cat";
         this.passwordHash = PasswordHasher.hash(passwordPlain);
         this.intentosFallidos = 0;
         this.locked = false;
@@ -27,6 +29,10 @@ public class User {
 
     public int getId(){ 
         return id; 
+    }
+
+    public String getEmail(){
+        return email;
     }
 
     public String getUsername(){ 

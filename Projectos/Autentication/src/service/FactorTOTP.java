@@ -17,7 +17,7 @@ public class FactorTOTP extends FactorAutenticacion {
             return false;
         } 
 
-        String code = (input == null) ? "" : input.trim();
+        String code = (input == null) ? "" : input.trim(); //CHAT nos ayudo con esto!
         return code.equals(session.getOtpActual());
     }
 

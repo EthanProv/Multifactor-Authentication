@@ -35,7 +35,7 @@ public class AuthSession {
     }
 
     public void Start(User usuario){
-        this.user = user; 
+        this.user = usuario; 
     }
     
     public void setOtp(String otp, long creadoEnSegundos) {

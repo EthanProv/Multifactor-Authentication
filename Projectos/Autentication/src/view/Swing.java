@@ -96,7 +96,7 @@ public class Swing {
         JButton botonMFA = new JButton("Activar MFA");
         JButton botonVolver = new JButton("Volver");
         /*añadir la accion del boton HECHO*/
-        botonMFA.addActionListener(e -> controller.añadirMFA(correo.getText(), usuario.getText()));
+        botonMFA.addActionListener(e -> controller.añadirMFA(usuario.getText(), correo.getText()));
         botonVolver.addActionListener(e -> controller.menuParaVolver());
 
         panel.add(new JLabel("Usuario", SwingConstants.CENTER));
@@ -114,7 +114,7 @@ public class Swing {
         JButton botonIniciarSesion = new JButton("Iniciar sesion");
         JButton botonVolver = new JButton("Volver");
         /*añadir la accion del boton HECHO*/
-        botonIniciarSesion.addActionListener(e -> controller.procesarLogin(usuario.getText(),contraseña.getText()));
+        botonIniciarSesion.addActionListener(e -> controller.procesarLogin(usuario.getText(),new String(contraseña.getText())));
         botonVolver.addActionListener(e -> controller.menuParaVolver());
 
         panel.add(new JLabel("Usuario", SwingConstants.CENTER));
@@ -171,6 +171,56 @@ public class Swing {
 
     //Añadir metodos para la ventana que se genera una vez el usuario
     //pasa al estado de autenticacion
+    private void mostrarVentanaMFA(){
+        if (mfaFrame != null && mfaFrame.isDisplayable()){
+            return;
+        } 
+
+        mfaFrame = new JFrame("Codigo Multifacor");
+        mfaFrame.setSize(360, 240);
+        mfaFrame.setLocationRelativeTo(null);
+        mfaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        mfaCodeLabel = new JLabel("------", SwingConstants.CENTER);
+        mfaCodeLabel.setFont(new Font("Arial", Font.BOLD, 48));
+
+        mfaCountdownLabel = new JLabel("", SwingConstants.CENTER);
+
+        
+
+        JPanel p = new JPanel(new GridLayout(0,1,8,8));
+        p.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        p.add(new JLabel("Codigo MFA actual:", SwingConstants.CENTER));
+        p.add(mfaCodeLabel);
+        p.add(mfaCountdownLabel);
+        
+        mfaFrame.setContentPane(p);
+
+        // Actualiza cada 1 segundo
+        mfaTimer = new javax.swing.Timer(1000, e -> {
+            mfaCodeLabel.setText(controller.codigoDemoActual());
+            mfaCountdownLabel.setText("Cambia en " + controller.segundosRestantesCodigo() + " s");
+        });
+        mfaTimer.start();
+
+        // Primera carga
+        mfaCodeLabel.setText(controller.codigoDemoActual());
+        mfaCountdownLabel.setText("Cambia en " + controller.segundosRestantesCodigo() + " s");
+
+        mfaFrame.setVisible(true);
+    
+    }
+
+    private void cerrarVentanaMFA(){
+        if (mfaTimer != null) {
+            mfaTimer.stop();
+            mfaTimer = null;
+        }
+
+        if (mfaFrame != null) {
+            mfaFrame.dispose();
+            mfaFrame = null;
+        }
 
 
     }

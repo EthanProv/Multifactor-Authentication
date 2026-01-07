@@ -65,11 +65,7 @@ public class User {
         mfaCuenta.activar(secret);
     }
 
-    //HAY QUE REMPALZAR EL activarMFA por el nuevo a continuarcion
-    public void activarMFA(String email){
-        String secret = Integer.toHexString((username + ":" + System.nanoTime()).hashCode()).toUpperCase();
-        activarMFA(email, secret);
-    }
+    
 
 
     public String getMFAEmail() {

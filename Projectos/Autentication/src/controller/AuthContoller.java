@@ -28,6 +28,7 @@ public class AuthContoller {
 
     public void menuParaVolver(){
         sesion.setEstado(EstadoSesion.Esperando_Opcion);
+        actualizarVentana();
     }
 
     public void cerrarSesion(){
@@ -46,13 +47,15 @@ public class AuthContoller {
         actualizarVentana();
     }
     
-    public void añadirMFA(String usuario, String mail){
+    public void añadirMFA(String mail, String usuario){
 
-        if(usuario == null || usuario.trim().isEmpty()){
+        
+
+        if(usuario == null || usuario.isEmpty()){
             JOptionPane.showMessageDialog(null, "Introduce tu nombre de usuario", "MFA", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(mail == null || mail.trim().isEmpty()){
+        if(mail == null || mail.isEmpty()){
             JOptionPane.showMessageDialog(null, "Introduce tu mail correspondiente", "MFA", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -60,20 +63,15 @@ public class AuthContoller {
         boolean ok = auth.anadirMFA(usuario.trim(), mail.trim());
 
         if (!ok) {
-            JOptionPane.showMessageDialog(null, "El usuario no existe o el mail no es válido", "MFA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El usuario no existe", "MFA", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "MFA activado para el usuario --> " + username, "MFA", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "MFA activado para el usuario: " + usuario, "MFA", JOptionPane.INFORMATION_MESSAGE);
         }
-
         sesion.setEstado(EstadoSesion.Esperando_Opcion);
         actualizarVentana();
     }
 
     public void procesarLogin(String usuario, String contraseña){
-
-        User u = sesion.getUser();
-        boolean ok = auth.login(usuario.trim(), contraseña);
-
         if(usuario == null || usuario.isEmpty()){
             JOptionPane.showMessageDialog(null, "Introduce tu nombre de usuario", "Login", JOptionPane.WARNING_MESSAGE);
             return;
@@ -81,6 +79,11 @@ public class AuthContoller {
         if(contraseña == null){
             contraseña = "";
         }
+        
+        boolean ok = auth.login(usuario.trim(), contraseña);
+        User u = sesion.getUser();
+
+        
 
         if(u == null){
             JOptionPane.showMessageDialog(null, "El usuario no existe", "Login", JOptionPane.ERROR_MESSAGE);
@@ -132,17 +135,14 @@ public class AuthContoller {
 
     }
 
-    public String ventanaMFA(){
-        User u = sesion.getUser();
-        if(u == null || !u.isActiveMFA() || u.getMfaCuenta() == null){
-            return "-";
-        }
-        return auth.getOtp().generarOTP(u.getMfaCuenta().getSecret());
+
+    public String codigoDemoActual(){
+        return auth.otpActual();
     }
 
-    public int duracionDelCodigo(){
-        return auth.getOtp().segundosRestantes();
+    public int segundosRestantesCodigo(){
+        return auth.segundosRestantesOTP();
     }
+
     
 }
-

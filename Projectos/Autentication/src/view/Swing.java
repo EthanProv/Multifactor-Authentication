@@ -171,11 +171,7 @@ public class Swing {
 
     //Añadir metodos para la ventana que se genera una vez el usuario
     //pasa al estado de autenticacion
-    private void mostrarVentanaMFA(){
 
-    }
-
-    private void cerrarVentanaMFA(){
 
     }
 

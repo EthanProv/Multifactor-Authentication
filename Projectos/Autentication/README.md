@@ -1,18 +1,19 @@
-## Getting Started
-
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+# Multifactor-Authentication
+## Quina es la funcio del programa
+Multifactor-Authentication es un programa fet amb codi Java i Swing (librería gráfica de Java). Aquest programa es un autenticacio basica d'usuaris. Cada usuari te:
+- Nom usuari
+- Correu usuari
+- Contrasenya (Per seguretat el programa usara un hash de contrasenya)
+> [!WARNING]
+> No pots crear un usuari per tu mateix, a continuacio et deixo els usuaris que hi han disponibles
+> - Usuari:  Jordig  Password: admin1
+> - Usuari:  Ethan  Password: admin1
+> - Usuari:  Jordib  Password: admin1
+> - Usuari:  Marti  Password: admin1
+> - Usuari:  a  Password: a
+Que pots fer amb el programa:
+- Iniciar sessio
+- Tancar sessio
+- Fer que el inici de sessio inclogui un MFA
+> [!IMPORTANT]
+> Els correus dels usuaris son tots @enti.cat, exemple ethan@enti.cat

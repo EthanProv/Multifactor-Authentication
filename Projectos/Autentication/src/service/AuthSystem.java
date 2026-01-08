@@ -55,7 +55,7 @@ public class AuthSystem {
       if (email == null || email.trim().isEmpty()){
         return false;
       } 
-      if(!email.contains("@enti.cat")){
+      if(!email.contains("@") || !email.contains(".")){
         return false;
       }
 

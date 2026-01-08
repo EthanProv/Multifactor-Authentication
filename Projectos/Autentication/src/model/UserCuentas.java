@@ -13,6 +13,7 @@ public class UserCuentas {
         usuarios.add(new User(0, "Jordig", "admin1"));
         usuarios.add(new User(1, "Ethan", "admin2"));
         usuarios.add(new User(2, "Jordib", "admin3"));
+        usuarios.add(new User(3, "Marti", "admin4"));
     }
 
     public User findUser(String us){

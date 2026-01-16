@@ -63,7 +63,7 @@ public class User {
     
 
 
-    //Lo de abajo habra que elimianr opinar?
+
     public void activarMFA(String email, String secret){
         if (mfaCuenta == null) {
             mfaCuenta = new MFACuenta(email);

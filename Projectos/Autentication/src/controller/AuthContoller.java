@@ -153,7 +153,10 @@ public class AuthContoller {
     public String email(){
         User u = sesion.getUser();
         String mail = u.getMfaCuenta().getEmail();
-        return (mail == null) ? "" : mail;
+        if (mail == null){
+            return "";
+        }
+        return mail;
     }
 
     

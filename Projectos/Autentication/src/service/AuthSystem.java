@@ -127,10 +127,10 @@ public class AuthSystem {
   }
 
   public String otpActual() {
-  if (session.getOtpActual() == null) {
-    return "------";
-  }
-  return session.getOtpActual();
+    if (session.getOtpActual() == null) {
+      return "------";
+    }
+    return session.getOtpActual();
 }
 
     public int segundosRestantesOTP() {
@@ -144,10 +144,10 @@ public class AuthSystem {
     public void refrescarOtpSiExpira() { 
     // Solo si hay usuario y MFA activo
     User u = session.getUser();
-    if (u == null) return;
-    if (!u.isActiveMFA()) return;
+      if (u == null) return;
+      if (!u.isActiveMFA()) return;
 
-    // Si no hay OTP aún, crea uno
+    // Si no hay OTP, crea uno
     if (session.getOtpActual() == null) {
       String nuevo = otp.generarOTP();
       session.setOtp(nuevo, otp.ahoraSegundos());

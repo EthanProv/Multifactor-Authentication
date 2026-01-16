@@ -3,7 +3,7 @@ package service;
 public final class PasswordHasher  {
     
     public static String hash(String password){
-        if (password == null) return "";
+        
         return String.valueOf(password.hashCode());
         
     }

@@ -47,8 +47,11 @@ El codi java utilitza la arquitectura MVC (Model-Vista-Controlador) + Service i 
 ## Execucio programa
 Per executar el programa ara mateix s'ha de fer al Visual Studio com si fos un programa normal.
 
+## Com s'ha treballat
+En aquest projecte he utilitzat GitHub per al control de versions i la gestió del codi, Visual Studio com a entorn de desenvolupament per programar i provar l’aplicació, i Visual Studio compartit per treballar de manera col·laborativa amb altres membres de l’equip.
+
 ## Autors
-Jordi Gomez Tome
-Ethan Provencio Grau
-Jordi Barberan Villa
+- Jordi Gomez Tome. jordi.gomez@estudiant.enti.cat
+- Ethan Provencio Grau. ethan.provencio@estudiant.enti.cat
+- Jordi Barberan Villa. jordi.barberan@estudiant.enti.cat
 

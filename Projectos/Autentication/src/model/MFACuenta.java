@@ -5,7 +5,6 @@ public class MFACuenta {
     private String secret;
     private boolean activar;
 
-
     public MFACuenta(String email){
         this.email = email;
         this.secret = null;

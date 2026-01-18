@@ -1,8 +1,10 @@
 package app;
+
 import controller.*;
 import model.*;
 import service.*;
 import view.*;
+
 public class App {
     
     //MAIN

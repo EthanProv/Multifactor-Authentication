@@ -4,16 +4,12 @@ import java.awt.*;
 
 import controller.AuthContoller;
 import model.EstadoSesion;
-import model.User;
 
 public class Swing {
     
     private JFrame frame;
     private JPanel panel;
     private AuthContoller controller;
-    
-    
-        
     private JFrame mfaFrame;
     private JLabel mfaCodeLabel;
     private JLabel mfaCountdownLabel;
@@ -37,7 +33,6 @@ public class Swing {
 
     public void mostrarVentana(EstadoSesion estado){
         panel.removeAll(); // Se hace para que al cambiar de estado se muestren otros componentes
-
         //Usar los 2 metodos que hay que crear para cuando se cambie el
         //estado a procesando_autenticacion HECHO
         if(estado == EstadoSesion.Procesando_Autenticacion){
@@ -71,14 +66,12 @@ public class Swing {
         panel.repaint();
     }
 
-
-
     private void menuEsperandoOpcion(){
         //Poner un panel que muestre "Selecciona una opcion" HECHO
-        panel.add(new JLabel("Selecciona una opcion", SwingConstants.CENTER));
+        panel.add(new JLabel("Selecciona una opción", SwingConstants.CENTER));
         //Para el estado Esperando_Opcion ponemos 2 botones
         JButton mfa = new JButton("Añadir cuenta MFA");
-        JButton iniciarSesion = new JButton("Iniciar Sesion");
+        JButton iniciarSesion = new JButton("Iniciar sesión");
         /*hay que añadir las acciones de los botones, la clase authcontroller
         es la que debe de hacer las acciones correspondientes de los botones*/
         mfa.addActionListener(e -> controller.cambiarAProcesandoMFA());
@@ -103,7 +96,7 @@ public class Swing {
 
         panel.add(new JLabel("Usuario", SwingConstants.CENTER));
         panel.add(usuario);
-        panel.add(new JLabel("Correo electronico:"));
+        panel.add(new JLabel("Correo electrónico", SwingConstants.CENTER));
         panel.add(correo);
         panel.add(botonMFA);
         panel.add(botonVolver);
@@ -113,7 +106,7 @@ public class Swing {
         //Añadir el boton de volver HECHO
         JTextField usuario = new JTextField();
         JTextField contraseña = new JPasswordField();
-        JButton botonIniciarSesion = new JButton("Iniciar sesion");
+        JButton botonIniciarSesion = new JButton("Iniciar sesión");
         JButton botonVolver = new JButton("Volver");
         /*añadir la accion del boton HECHO*/
         botonIniciarSesion.addActionListener(e -> controller.procesarLogin(usuario.getText(),new String(contraseña.getText())));
@@ -136,7 +129,7 @@ public class Swing {
         botonCodigo.addActionListener(e -> controller.introducirCodigo(codigoOTP.getText()));
         botonCancelar.addActionListener(e -> controller.menuParaVolver());
 
-        panel.add(new JLabel("Introduce el codigo de 6 digitos que se muestra en la ventana nueva", SwingConstants.CENTER));
+        panel.add(new JLabel("Introduce el código de 6 digitos que se muestra en la ventana nueva", SwingConstants.CENTER));
         panel.add(codigoOTP);
         panel.add(botonCodigo);
         panel.add(botonCancelar);
@@ -144,9 +137,9 @@ public class Swing {
 
     private void menuSesionActiva(){
         //Añadir 2 botones con cerrar sesion (este boton volvera para atras) y salir HECHO
-        panel.add(new JLabel("Has iniciado sesion"));
+        panel.add(new JLabel("Has iniciado sesión"));
 
-        JButton botonCerrarSesion = new JButton("Cerrar sesion");
+        JButton botonCerrarSesion = new JButton("Cerrar sesión");
         JButton botonSalir = new JButton("Salir");
 
         botonCerrarSesion.addActionListener(e -> controller.cerrarSesion());
@@ -161,7 +154,7 @@ public class Swing {
         //2 botones de volver para al menu inicial y para terminar el programa HECHO
         panel.add(new JLabel("Se ha bloqueado la cuenta"));
 
-        JButton botonVolverMenu = new JButton("Volver al menu");
+        JButton botonVolverMenu = new JButton("Volver al menú");
         JButton botonSalir = new JButton("Salir");
 
         botonVolverMenu.addActionListener(e -> controller.menuParaVolver());
@@ -170,7 +163,6 @@ public class Swing {
         panel.add(botonVolverMenu);
         panel.add(botonSalir);
     }
-
     //Añadir metodos para la ventana que se genera una vez el usuario
     //pasa al estado de autenticacion
     private void mostrarVentanaMFA(){
@@ -179,7 +171,7 @@ public class Swing {
         } 
         JLabel emailLabel = new JLabel(controller.email(), SwingConstants.CENTER);
         emailLabel.setFont(new Font("Arial", Font.PLAIN, 18));
-        mfaFrame = new JFrame("Codigo Multifacor");
+        mfaFrame = new JFrame("Código Multifactor");
         mfaFrame.setSize(360, 240);
         mfaFrame.setLocationRelativeTo(null);
         mfaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -189,17 +181,14 @@ public class Swing {
 
         mfaCountdownLabel = new JLabel("", SwingConstants.CENTER);
 
-        
-
         JPanel p = new JPanel(new GridLayout(0,1,8,8));
         p.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        p.add(new JLabel("Codigo MFA actual de: "   , SwingConstants.CENTER));
+        p.add(new JLabel("Código MFA actual de: "   , SwingConstants.CENTER));
         p.add(emailLabel);
         p.add(mfaCodeLabel);
         p.add(mfaCountdownLabel);
         
         mfaFrame.setContentPane(p);
-
         // Actualiza cada 1 segundo
         mfaTimer = new javax.swing.Timer(1000, e -> {
             controller.refrescarCodigoSiExpira();
@@ -207,7 +196,6 @@ public class Swing {
             mfaCountdownLabel.setText("Cambia en " + controller.segundosRestantesCodigo() + " s");
         });
         mfaTimer.start();
-
         // Primera carga
         mfaCodeLabel.setText(controller.codigoActual());
         mfaCountdownLabel.setText("Cambia en " + controller.segundosRestantesCodigo() + " s");
@@ -226,7 +214,6 @@ public class Swing {
             mfaFrame.dispose();
             mfaFrame = null;
         }
-
 
     }
 

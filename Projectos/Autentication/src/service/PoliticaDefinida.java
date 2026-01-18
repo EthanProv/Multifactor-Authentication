@@ -14,7 +14,6 @@ public class PoliticaDefinida {
         return intentosFallidos >= maxIntentos;
     }
 
-    //Getther de maximos intentos, estaira bien?
     
 }
 

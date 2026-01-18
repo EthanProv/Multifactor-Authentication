@@ -2,7 +2,6 @@ package model;
 
 import service.PasswordHasher;
 
-
 public class User {
 
     private final int id;
@@ -59,20 +58,12 @@ public class User {
         return mfaCuenta != null && mfaCuenta.isActivada();
     }
 
-
-    
-
-
-
     public void activarMFA(String email, String secret){
         if (mfaCuenta == null) {
             mfaCuenta = new MFACuenta(email);
         }
         mfaCuenta.activar(secret);
     }
-
-    
-
 
     public String getMFAEmail() {
         if (mfaCuenta == null){

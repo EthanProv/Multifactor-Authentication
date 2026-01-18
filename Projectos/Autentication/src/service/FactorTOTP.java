@@ -1,12 +1,8 @@
 package service;
 
 import model.AuthSession;
-import model.MFACuenta;
-import model.User;
-
 
 public class FactorTOTP extends FactorAutenticacion {
-
 
     @Override
     public boolean verificar(AuthSession session, String input) {

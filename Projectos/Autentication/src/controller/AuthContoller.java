@@ -6,7 +6,6 @@ import model.*;
 import view.Swing;
 import service.*;
 
-
 public class AuthContoller {
     
     private AuthSession sesion;
@@ -49,8 +48,6 @@ public class AuthContoller {
     
     public void añadirMFA(String usuario, String mail){
 
-        
-
         if(usuario == null || usuario.isEmpty()){
             JOptionPane.showMessageDialog(null, "Introduce tu nombre de usuario", "MFA", JOptionPane.WARNING_MESSAGE);
             return;
@@ -72,10 +69,12 @@ public class AuthContoller {
     }
 
     public void procesarLogin(String usuario, String contraseña){
+
         if(usuario == null || usuario.isEmpty()){
             JOptionPane.showMessageDialog(null, "Introduce tu nombre de usuario", "Login", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
         if(contraseña == null){
             contraseña = "";
         }
@@ -83,14 +82,13 @@ public class AuthContoller {
         boolean ok = auth.login(usuario.trim(), contraseña);
         User u = sesion.getUser();
 
-        
-
         if(u == null){
             JOptionPane.showMessageDialog(null, "El usuario no existe", "Login", JOptionPane.ERROR_MESSAGE);
             sesion.setEstado(EstadoSesion.Procesando_Login);
             actualizarVentana();
             return;
         }
+
         if(!ok){
             if(u.isLocked()){
                 sesion.setEstado(EstadoSesion.Bloqueado);
@@ -106,6 +104,7 @@ public class AuthContoller {
         } else {
             sesion.setEstado(EstadoSesion.Sesion_Activa);
         }
+
         actualizarVentana();
         
     }
@@ -139,8 +138,6 @@ public class AuthContoller {
         auth.refrescarOtpSiExpira();
     }
 
-
-
     public String codigoActual(){
         return auth.otpActual();
     }
@@ -148,7 +145,6 @@ public class AuthContoller {
     public int segundosRestantesCodigo(){
         return auth.segundosRestantesOTP();
     }
-
 
     public String email(){
         User u = sesion.getUser();
@@ -159,5 +155,4 @@ public class AuthContoller {
         return mail;
     }
 
-    
 }

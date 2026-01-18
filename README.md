@@ -60,7 +60,7 @@ Per executar el programa ara mateix s'ha de fer al Visual Studio Code com si fos
 - Logs
   - Registrar intents d'inici de sessió, que indiquin data, hora i estat
 - Millorar l'algoritme de generació de codis
-  - Aplicar un altre algoritme per generar els codis d'autenticació seria ideal per millorar la seguretat, en un principi vam voler implementar l'algoritme TOTP, però per problemes de temps vam decidir implementar l'algoritem OTP
+  - Aplicar un altre algoritme per generar els codis d'autenticació seria ideal per millorar la seguretat, en un principi vam voler implementar l'algoritme TOTP, però per problemes de temps vam decidir implementar l'algoritme OTP
 
 ## Com s'ha treballat?
 En aquest projecte hem utilitzat GitHub per al control de versions i la gestió del codi, Visual Studio Code amb Github Desktop com a entorn de desenvolupament per programar, provar l’aplicació i anant fent actualitzacions de com ha anat avançant el programa, a més hem fet servir una extensió del Visual Studio Code anomenada Live Share per treballar de manera col·laborativa amb tots els membres de l’equip.

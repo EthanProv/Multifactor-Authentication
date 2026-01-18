@@ -44,6 +44,24 @@ El codi java utilitza l'arquitectura MVC (Model-Vista-Controlador) + Service i a
 ## Execució del programa
 Per executar el programa ara mateix s'ha de fer al Visual Studio Code com si fos un programa normal.
 
+## Limitacions del programa
+- Usuaris predefinits
+  - No es permet crear, modificar ni eliminar usuaris, limitant així l'escalabilitat
+- Interfície gràfica senzilla
+  - Swing és funcional i permet realitzar el necessari, però és poc moderna i limitada
+- Persistència de dades limitada
+  - Els usuaris no es guarden en una base de dades, un cop finalitza el programa es perd la informació
+ 
+## Possibles millores futures
+- MFA real
+  - Envia el codi MFA per múltiples vies com: correu electrònic, SMS o aplicacions d'autenticació (Google Atuhenticator)
+- Millorar la interficie gràfica
+  - A l'haver aplicat l'arquitectura MVC, seria possible migrar a altres interfícies gràfiques com JavaFX
+- Logs
+  - Registrar intents d'inici de sessió, que indiquin data, hora i estat
+- Millorar l'algoritme de generació de codis
+  - Aplicar un altre algoritme per generar els codis d'autenticació seria ideal per millorar la seguretat
+
 ## Com s'ha treballat?
 En aquest projecte hem utilitzat GitHub per al control de versions i la gestió del codi, Visual Studio Code amb Github Desktop com a entorn de desenvolupament per programar, provar l’aplicació i anant fent actualitzacions de com ha anat avançant el programa, a més hem fet servir una extensió del Visual Studio Code anomenada Live Share per treballar de manera col·laborativa amb tots els membres de l’equip.
 

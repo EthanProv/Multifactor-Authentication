@@ -8,10 +8,9 @@ El MFA (Multi-Factor Authentication) és un mètode de seguretat que requereix m
 ## Informació important previa
 No és possible crear un usuari per tu mateix, a continuació es mostren els usuaris que hi ha disponibles.
 > - Usuari:  Jordig  Password: admin1
-> - Usuari:  Ethan  Password: admin1
-> - Usuari:  Jordib  Password: admin1
-> - Usuari:  Marti  Password: admin1
-> - Usuari:  a  Password: a
+> - Usuari:  Ethan  Password: admin2
+> - Usuari:  Jordib  Password: admin3
+> - Usuari:  Marti  Password: admin4
 
 ## Quin procediment segueix el programa?
 Per començar, aquest programa és una autenticació bàsica d'usuaris. Cada usuari te:

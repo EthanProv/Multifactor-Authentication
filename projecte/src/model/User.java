@@ -7,13 +7,9 @@ public class User {
     private final int id;
     private final String username;
     private String email;
-
     private String passwordHash;
-
     private int intentosFallidos;
     private boolean locked;
-
-    // Composición 0..1
     private MFACuenta mfaCuenta;
 
     public User(int id, String username, String passwordPlain) {

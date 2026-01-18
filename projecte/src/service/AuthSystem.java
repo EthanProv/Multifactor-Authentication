@@ -53,13 +53,12 @@ public class AuthSystem {
       return false;
     }
 
-    String secret = Integer.toHexString((u.getUsername() + ":" + System.nanoTime()).hashCode()).toUpperCase(); //Revisar 
+    String secret = Integer.toHexString((u.getUsername() + ":" + System.nanoTime()).hashCode()).toUpperCase(); 
     u.activarMFA(email.trim(), secret);
 
     return true;
   }
 
-  
   public boolean login(String username, String password) {
     User u = buscarUser(username);
     session.setUser(u);
@@ -77,19 +76,24 @@ public class AuthSystem {
     if(ok){
       u.resetIntentosFallidos();
 
-      if (u.isActiveMFA()) {
+      if(u.isActiveMFA()){
         String code = otp.generarOTP();
         session.setOtp(code, otp.ahoraSegundos());
-      } else {
+      }else{
         session.clearOtp();
       }
+
     }else{
       u.incrementarIntentosFallidos();
+
       if(politica.comprobar(u.getIntentosFallidos())){
         u.lock();
       }
+
     }
+
     return ok;
+
   }
 
    
@@ -112,18 +116,21 @@ public class AuthSystem {
     if(ok){
       u.resetIntentosFallidos();
       session.clearOtp();
+
     }else{
       u.incrementarIntentosFallidos();
+
       if(politica.comprobar(u.getIntentosFallidos())){
         u.lock();
       }
+
     }
 
     return ok;
   }
 
   public String otpActual() {
-    if (session.getOtpActual() == null) {
+    if (session.getOtpActual() == null){
       return "------";
     }
 
@@ -134,9 +141,9 @@ public class AuthSystem {
     if(session.getOtpActual() == null){
       return 0;
     }
+
     return otp.segundosRestantes(session.getOtpCreadoEnSegundos());
   }
-
 
   public void refrescarOtpSiExpira() { 
     // Solo si hay usuario y MFA activo
@@ -156,14 +163,13 @@ public class AuthSystem {
       String nuevo = otp.generarOTP();
       session.setOtp(nuevo, otp.ahoraSegundos());
     }
-}
 
-
-    
+  }
 
   public void logout() {
     session.setUser(null);
     session.clearOtp();
+    
   }
 
 }
